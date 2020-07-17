@@ -14,7 +14,7 @@ public abstract class GenericDAO<T,ID> {
     private  final EntityManager entityManager;
 
     GenericDAO(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence.xml");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
@@ -26,12 +26,23 @@ public abstract class GenericDAO<T,ID> {
         entityManager.close();
     }
 
-    protected abstract T getById(ID id);
 
-     protected abstract void remove(ID id);
 
-      public abstract List<T> getAll();
+      public void update(T t,ID id){
+          EntityManager entityManager = getEntityManager();
+          entityManager.getTransaction().begin();
+          T entityFromDb =(T) entityManager.find(Object.class, id);
+          entityManager.merge(t);
+          entityManager.persist(entityFromDb);
+          entityManager.getTransaction().commit();
+          entityManager.close();
 
-      public abstract void update(T t,ID id);
+      }
+
+    public abstract T getById(ID id);
+
+    public abstract void remove(ID id);
+
+    public abstract List<T> getAll();
 }
 

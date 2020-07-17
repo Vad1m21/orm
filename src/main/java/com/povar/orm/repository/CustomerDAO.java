@@ -4,18 +4,13 @@ import com.povar.orm.entity.Company;
 import com.povar.orm.entity.Customer;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
-import java.util.zip.CheckedOutputStream;
 
-public class CompanyDAO extends GenericDAO<Company,Long> {
-
-
+public class CustomerDAO extends GenericDAO<Customer,Long> {
     @Override
-    public Company getById(Long id) {
+    public Customer getById(Long id) {
         EntityManager entityManager = getEntityManager();
-        Company entityFromDb = entityManager.find(Company.class, id);
+        Customer entityFromDb = entityManager.find(Customer.class, id);
         entityManager.close();
 
         return entityFromDb;
@@ -25,21 +20,17 @@ public class CompanyDAO extends GenericDAO<Company,Long> {
     public void remove(Long id) {
         EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
-        Company entityFromDb =entityManager.find(Company.class, id);
+        Customer entityFromDb =entityManager.find(Customer.class, id);
         entityManager.remove(entityFromDb);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
 
     @Override
-    public List<Company> getAll() {
+    public List<Customer> getAll() {
         EntityManager entityManager = getEntityManager();
-        List<Company> entities = entityManager.createQuery("From Company ").getResultList();
+        List<Customer> entities = entityManager.createQuery("From Customer ").getResultList();
         entityManager.close();
         return entities;
     }
-
-
 }
-
-

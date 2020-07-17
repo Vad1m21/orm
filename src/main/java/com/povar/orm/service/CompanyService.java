@@ -13,15 +13,21 @@ public class CompanyService {
 
     private final CompanyDAO companyDAO;
 
-    public void createCompany(Company company){
+
+
+    public void create(Company company){
         companyDAO.save(company);
     }
 
-    public void updateCompany(Company company , Long id){
+    public void update(Company company , Long id){
         companyDAO.update(company,id);
     }
 
     public List<Company> findAll(){
         return companyDAO.getAll();
     }
+
+    public void delete(Long id){ companyDAO.remove(id); }
+
+    public Company findById(Long id){ return companyDAO.getById(id);}
 }

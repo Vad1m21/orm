@@ -1,21 +1,16 @@
 package com.povar.orm.repository;
 
 import com.povar.orm.entity.Company;
-import com.povar.orm.entity.Customer;
+import com.povar.orm.entity.Developer;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
-import java.util.zip.CheckedOutputStream;
 
-public class CompanyDAO extends GenericDAO<Company,Long> {
-
-
+public class DeveloperDAO  extends  GenericDAO<Developer, Long>{
     @Override
-    public Company getById(Long id) {
+    public Developer getById(Long id) {
         EntityManager entityManager = getEntityManager();
-        Company entityFromDb = entityManager.find(Company.class, id);
+        Developer entityFromDb = entityManager.find(Developer.class, id);
         entityManager.close();
 
         return entityFromDb;
@@ -25,21 +20,17 @@ public class CompanyDAO extends GenericDAO<Company,Long> {
     public void remove(Long id) {
         EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
-        Company entityFromDb =entityManager.find(Company.class, id);
+        Developer entityFromDb =entityManager.find(Developer.class, id);
         entityManager.remove(entityFromDb);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
 
     @Override
-    public List<Company> getAll() {
+    public List<Developer> getAll() {
         EntityManager entityManager = getEntityManager();
-        List<Company> entities = entityManager.createQuery("From Company ").getResultList();
+        List<Developer> entities = entityManager.createQuery("From Developer ").getResultList();
         entityManager.close();
         return entities;
     }
-
-
 }
-
-
