@@ -1,10 +1,17 @@
 package com.povar.orm.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+
+@EqualsAndHashCode
+@ToString
 @Data
 @Entity
 @Table(name = "skills")
@@ -23,4 +30,8 @@ public class Skill {
 
     @Column (name = "level")
     private Level level;
-}
+
+    @ManyToMany(mappedBy = "skills",cascade = CascadeType.ALL)
+    private Set<Developer> developers = new HashSet<>();
+
+ }

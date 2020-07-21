@@ -1,6 +1,7 @@
 package com.povar.orm.service;
 
 import com.povar.orm.entity.Customer;
+import com.povar.orm.entity.Developer;
 import com.povar.orm.entity.Project;
 import com.povar.orm.repository.CustomerDAO;
 import com.povar.orm.repository.ProjectDAO;
@@ -29,5 +30,7 @@ public class ProjectService {
     public void delete(Long id){ projectDAO.remove(id); }
 
     public Project findById(Long id){ return projectDAO.getById(id);}
+
+    public List<Project> getProjectFromDB(){ return projectDAO.getProjectsFromDB(); }
 
 }
